@@ -9,7 +9,7 @@
 
 Pour lancer l'app en local : 
 ````
-streamlit run secret_santa/app.py
+PYTHONPATH=. streamlit run secret_santa/app.py
 ``````
 
 
