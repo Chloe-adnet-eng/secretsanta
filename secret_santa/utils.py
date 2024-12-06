@@ -11,4 +11,3 @@ def check_member(prenom: str, nom: str, family: pd.DataFrame):
     
 def clean(text: str):
     return unidecode(text.lower())
-
