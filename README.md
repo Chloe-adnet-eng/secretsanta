@@ -2,7 +2,7 @@
 
 ## 1. Basic informations 
 
-- Lien du repos github : https://github.com/Chloe-adnet-eng/secretsanta/pull/1/files
+- Lien du repos github : https://github.com/Chloe-adnet-eng/secretsanta
 
 
 ## 2. Deployer l'app en local
