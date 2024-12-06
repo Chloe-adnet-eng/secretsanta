@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 from pathlib import Path
-from secret_santa.utils import check_member, clean
+from utils import check_member, clean
 # Load the data
 
 data_path = Path.cwd() / 'secret_santa' /'data' 
