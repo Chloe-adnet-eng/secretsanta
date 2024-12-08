@@ -10,10 +10,11 @@
 Pour lancer l'app en local : 
 ````
 PYTHONPATH=. streamlit run secret_santa/app.py
-``````
+````
 
 
-## 3. Lien de l'app déployée 
+## 3. Liens utils
 
-https://family-santa-91.streamlit.app/
+- Lien de l'app déployée : https://family-santa-91.streamlit.app/
 
+- Lien de la firebase : https://console.firebase.google.com/project/secretsanta-8da89/overview 

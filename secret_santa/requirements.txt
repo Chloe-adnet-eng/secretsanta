@@ -2,4 +2,6 @@ streamlit
 pandas
 numpy
 unidecode
-Pillow
+firebase_admin
+pathlib
+firebase_admin.db
