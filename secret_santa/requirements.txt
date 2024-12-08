@@ -4,4 +4,3 @@ numpy
 unidecode
 firebase_admin
 pathlib
-firebase_admin.db
