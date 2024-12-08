@@ -1,0 +1,6 @@
+firestore_certificate.json
+*.DS_Store
+*/__pycache__/*
+*/.ipynb_checkpoints/*
+*/.vscode/*
+*/.pytest_cache/*
