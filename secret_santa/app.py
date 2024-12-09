@@ -51,6 +51,7 @@ family = pd.read_csv(family_path)
 family_names = (family['prenom'] + ' ' + family['nom']).str.title()
 
 # Authentification avec sélection obligatoire
+st.markdown(f'''## Enregistre-toi pour participer! 🎅''')
 selected_name = st.selectbox("Sélectionne ton prénom et nom", family_names)
 
 if selected_name:
@@ -62,8 +63,9 @@ if selected_name:
     if st.button("✅ Je me suis sélectionné! 🎅"):
         st.write(f"Merci {first_name.title()}, tu peux continuer! ⭐️")
 
+    st.markdown(f'''## Tire au sort! 🎅''')
     # Tirage de la personne à qui offrir un cadeau
-    if st.button("2️⃣ Je tire au sort la personne à laquelle offrir un cadeau"):
+    if st.button("Je tire au sort la personne à laquelle offrir un cadeau"):
         identifiant = first_name + last_name
         identifiant_tire = tirage(identifiant)
         personne = family[family['identifiant'] == identifiant_tire]
@@ -72,41 +74,43 @@ if selected_name:
         st.markdown(f'''### La personne que tu as tiré est : {prenom} {nom}''')
 
     # Voir les idées cadeau de la personne tirée
-    if st.button("3️⃣ Je découvre les idées cadeau de la personne que j'ai tiré!"):
+    if st.button("Quelles sont les idées cadeau de la personne que j'ai tiré!"):
         identifiant = first_name + last_name
         idees = get_tirage_idee(identifiant)
-        if idees:
+        if idees == "Pas d'idées de cadeau pour le moment! 😭":
+            st.write("Aucune idée de cadeau disponible pour cette personne.")
+        else:
             st.write("Voici les idées de cadeau de la personne que tu as tirée :")
             st.write(idees)
-        else:
-            st.write("Aucune idée de cadeau disponible pour cette personne.")
+            
 
     st.markdown(f'''## Mes idées de cadeau! 🎁''')
     
     # Explication sur comment ajouter une idée de cadeau
-    with st.expander("📚 Comment ajouter une idée de Cadeau!"):
+    with st.expander("🧚‍♀️ Comment ajouter une idée de Cadeau!"):
 
         st.markdown("""
-        - **Étape 1** : Sélectionne toujours ton prénom et nom avant d'ajouter une idée de cadeau.
-        - **Étape 2** : Ajoute une idée de cadeau à la liste: autant de fois que tu le souhaites! 🎅
-        - **Étape 3** : Après avoir ajouté une idée, tu peux la consulter à tout moment.
+        - **Étape 1** : Entre une idée de cadeau dans l'encadré ci-dessous.
+        - **Étape 2** : Clique sur le bouton "J'enregistre cette idée de cadeau".
+        
+        Info : Tu peux consulter tes idées de cadeau en cliquant sur le bouton "Voir mes idées de cadeau".
+        Info : Tu peux ajouter autant d'idées de cadeau que tu le souhaites en te connectant plusieurs fois! 🎁
         """)
 
     # Section pour ajouter des idées de cadeau
     idee = st.text_input("🎁 Mes idées de cadeau")
 
     # Enregistrer les idées de cadeau
-    if st.button("♾️J'enregistre mes idées de cadeau 🎄"):
+    if st.button("J'enregistre cette idée de cadeau"):
         identifiant = first_name + last_name
         add_idee(identifiant, idee)
         st.write("Super, ton idée a bien été notée! 🚀")
 
     # Voir les idées de cadeau enregistrées
-    if st.button("🎁 Voir mes idées de cadeau"):
+    if st.button("Je consulte mes idées de cadeau"):
         idees = get_my_tirage_idee(first_name + last_name)  # Récupérer les idées de cadeau
         if idees:
-            st.write("Voici tes idées de cadeau sauvegardées :")
-            st.write(idees)
+            st.markdown(f"""Les idée de cadeau que tu as donné sont : {idees}""")
         else:
             st.write("Aucune idée de cadeau enregistrée pour le moment.")
             
