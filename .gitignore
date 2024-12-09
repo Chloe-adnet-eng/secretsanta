@@ -3,3 +3,4 @@
 */.ipynb_checkpoints/*
 */.vscode/*
 */.pytest_cache/*
+/secret_santa/data/secret_santa_cred.json

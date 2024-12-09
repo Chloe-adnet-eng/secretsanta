@@ -1,16 +1,24 @@
+from typing import Optional
+import firebase_admin
 from firebase_admin import credentials, db
 from firebase_admin.db import Reference
-import firebase_admin
-from typing import Optional
 import pandas as pd
+import streamlit as st
 from pathlib import Path
 import random
 
 data_path = Path.cwd() / "secret_santa" / "data" 
 
 FAMILY_PATH = data_path / "family_members.csv"
-FIRESTORE_CERTIFICATE_PATH = data_path / "firestore_certificate.json"
+FIRESTORE_CERTIFICATE_PATH = data_path / "secret_santa_cred.json"
 FIREBASE_URL = "https://secretsanta-8da89-default-rtdb.firebaseio.com"
+
+def get_app_credentials():
+    if Path.exists(FIRESTORE_CERTIFICATE_PATH):  
+        cred = credentials.Certificate(str(FIRESTORE_CERTIFICATE_PATH))
+    else:
+        cred = credentials.Certificate(st.secrets['firebase_certificate'])
+    return cred
 
 def delete_app() -> None:
     firebase_admin.delete_app(firebase_admin.get_app())
@@ -22,7 +30,7 @@ def get_app_reference() -> Optional[Reference]:
         print(f"Firebase app is already initialized.")
     except ValueError:
         print(f"Initializing Firebase app")
-        cred = credentials.Certificate(FIRESTORE_CERTIFICATE_PATH)
+        cred = get_app_credentials()
         firebase_admin.initialize_app(
             cred,
             {
