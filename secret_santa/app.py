@@ -27,9 +27,6 @@ data_path = Path.cwd() / "secret_santa" / "data"
 family_path = data_path / "family_members.csv"
 family = pd.read_csv(family_path)
 
-firestore_certificate_path = data_path / "firestore_certificate.json"
-firebase_url = "https://secretsanta-8da89-default-rtdb.firebaseio.com"
-
 first_name = clean(st.text_input("Entre ton prénom:"))
 last_name = clean(st.text_input("Entre ton nom de famille:"))
 identifiant = None
@@ -67,4 +64,4 @@ if st.button("4️⃣ Je découvre les idées cadeau de la personne que j'ai tir
         idees = get_tirage_idee(identifiant)
         st.write(idees)
     else: 
-            st.write("❌ Il faut que tu enregistres ton nom et ton prénom")
+        st.write("❌ Il faut que tu enregistres ton nom et ton prénom")
