@@ -152,7 +152,10 @@ def tirage(identifiant):
     if get_data(identifiant + 'a_tire') == "non":
         personnes_restantes = []
         for index, row in family.iterrows():
-            if get_data(row['identifiant'] + 'est_deja_tire') == "non":
+            if (
+                get_data(row['identifiant'] + 'est_deja_tire') 
+                == "non"
+                ) and row['identifiant'] != identifiant:
                 personnes_restantes.append(row['identifiant'])
         identifiant_tire = random.choice(personnes_restantes)
 
@@ -168,3 +171,11 @@ def get_tirage_idee(identifiant):
     
     return cadeaux
 
+
+def get_my_tirage_idee(identifiant):
+    # Récupérer les idées de cadeau pour un identifiant donné
+    cadeaux = get_data(identifiant + 'cadeau')
+    
+    if cadeaux == "Pas d'idées de cadeau pour le moment! 😭":
+        return None  # Retourner None si aucune idée n'est enregistrée
+    return cadeaux
