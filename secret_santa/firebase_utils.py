@@ -12,13 +12,13 @@ import json
 data_path = Path.cwd() / "secret_santa" / "data" 
 
 FAMILY_PATH = data_path / "family_members.csv"
-FIRESTORE_CERTIFICATE_PATH = data_path / "secret_santa_cred.json"
+FIREBASE_CERTIFICATE = st.secrets['firebase_certificate']
 FIREBASE_URL = "https://secretsanta-8da89-default-rtdb.firebaseio.com"
 
 def get_app_credentials():
+
     with tempfile.NamedTemporaryFile(delete=False, mode='w', encoding='utf-8') as f:
-        certificate = st.secrets['firebase_certificate']
-        json.dump(dict(certificate), f)
+        json.dump(dict(FIREBASE_CERTIFICATE), f)
         temp_path = f.name
     return credentials.Certificate(temp_path)
 
