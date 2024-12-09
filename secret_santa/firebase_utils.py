@@ -6,6 +6,8 @@ import pandas as pd
 import streamlit as st
 from pathlib import Path
 import random
+import tempfile
+import json
 
 data_path = Path.cwd() / "secret_santa" / "data" 
 
@@ -14,11 +16,11 @@ FIRESTORE_CERTIFICATE_PATH = data_path / "secret_santa_cred.json"
 FIREBASE_URL = "https://secretsanta-8da89-default-rtdb.firebaseio.com"
 
 def get_app_credentials():
-    if Path.exists(FIRESTORE_CERTIFICATE_PATH):  
-        cred = credentials.Certificate(str(FIRESTORE_CERTIFICATE_PATH))
-    else:
-        cred = credentials.Certificate(st.secrets['firebase_certificate'])
-    return cred
+    with tempfile.NamedTemporaryFile(delete=False, mode='w', encoding='utf-8') as f:
+        certificate = st.secrets['firebase_certificate']
+        json.dump(dict(certificate), f)
+        temp_path = f.name
+    return credentials.Certificate(temp_path)
 
 def delete_app() -> None:
     firebase_admin.delete_app(firebase_admin.get_app())
